@@ -11,10 +11,8 @@
         <div class="col-8">
           <router-view />
         </div>
-        <div class="col-2">
-          <div class="row">
-            <SidePics v-for="pic in state.sidePics" :key="pic.title" :pic="pic" />
-          </div>
+        <div class="col-2 d-flex flex-column">
+          <SidePics v-for="pic in state.sidePics" :key="pic.title" :pic="pic" />
         </div>
       </div>
     </div>

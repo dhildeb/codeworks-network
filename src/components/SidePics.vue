@@ -1,7 +1,5 @@
 <template>
-  <div class="col-12 h-100">
-    <img class=" img-fluid" :src="pic.square" alt="error">
-  </div>
+  <img class="img-fluid my-3" :src="pic.square" alt="ad here">
 </template>
 
 <script>
@@ -17,8 +15,4 @@ export default {
 </script>
 
 <style scoped>
-img{
-  height: 45%;
-  width: 45%;
-}
 </style>
