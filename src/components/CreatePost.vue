@@ -1,12 +1,13 @@
 <template>
   <div class="p-5 m-3 border shadow">
+    <img class="img-fluid profile-icon mb-3 rounded-circle" :src="state.account.picture" alt="">
     <form class="" @submit.prevent="createPost" v-if="state.account">
-      <label>Create Posts</label>
       <div class="form-group" src="message">
-        <input type="text" id="body" placeholder="message" v-model="state.body">
+        <textarea class="form-control border-0" rows="4" id="body" placeholder="Share your thoughts" v-model="state.body">
+        </textarea>
       </div>
-      <div class="form-group" src="image url">
-        <input type="text" id="imgUrl" placeholder="image url" v-model="state.imgUrl">
+      <div class="form-group border-0" src="image url">
+        <input type="text rounded" id="imgUrl" placeholder="image url" v-model="state.imgUrl">
       </div>
       <button type="submit" class="btn btn-transparent border-info text-info">
         create post
@@ -43,6 +44,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+input{
+    border: 0px;
+    padding: .5rem;
+}
 </style>

@@ -1,13 +1,25 @@
 <template>
-  <div class="border shadow my-5 rounded p-3">
-    <button class="btn btn-outline-danger" @click="deletePost" v-if="state.account.id === post.creator.id">
-      delete
-    </button>
+  <div class="border shadow rounded my-5 pb-3">
     <div class="d-flex justify-content-between p-3 bg-gradient-info">
       <router-link :to="{name: 'Profile', params: {id: post.creator.id}}">
         <img class="profile-icon rounded-circle mr-3" v-if="post.creator" :src="post.creator.picture" alt="">
         <span class="text-dark">{{ post.creator.name }}</span>
       </router-link>
+      <h2 class="dropdown click" v-if="state.account.id === post.creator.id" title="options">
+        <div class="text-secondary"
+             id="dropdownMenuButton"
+             data-toggle="dropdown"
+             aria-haspopup="true"
+             aria-expanded="false"
+        >
+          ...
+        </div>
+        <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
+          <i class="text-danger" @click="deletePost">
+            delete
+          </i>
+        </div>
+      </h2>
     </div>
     <div>
       <p class="p-3">
@@ -59,5 +71,8 @@ export default {
 .profile-icon{
   height: 50px;
   width: 50px;
+}
+.click{
+  cursor: pointer;
 }
 </style>

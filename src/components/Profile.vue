@@ -2,11 +2,11 @@
   <div v-if="state.toggle">
     <EditProfile />
   </div>
-  <div class="p-5 m-3 border shadow">
+  <div class="m-3 border shadow">
     <div>
       <img class="img-fluid banner" :src="state.activeProfile.coverImg" alt="">
-      <div class="d-flex">
-        <img class="img-fluid profile-icon rounded-circle" :src="state.activeProfile.picture" alt="">
+      <div class="d-flex p-3">
+        <img class="img-fluid position-absolute profile-icon rounded-circle" :src="state.activeProfile.picture" alt="">
         <div class="d-flex" v-if="state.activeProfile.graduated">
           <span>grad!</span>
           <span>{{ state.activeProfile.class }}</span>
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div v-if="state.account.id">
-      <button class="btn btn-outline-info" @click="toggleEdit" v-if="state.account.id === state.activeProfile.id">
+      <button class="btn btn-outline-info m-3" @click="toggleEdit" v-if="state.account.id === state.activeProfile.id">
         edit
       </button>
     </div>
@@ -43,7 +43,6 @@ export default {
       state,
       toggleEdit() {
         state.toggle = !state.toggle
-        console.log(state.toggle)
       }
     }
   }
