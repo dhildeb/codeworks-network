@@ -22,6 +22,7 @@
       </h2>
     </div>
     <div>
+      <span>{{ post.createdAt }}</span>
       <p class="p-3">
         {{ post.body }}
       </p>
