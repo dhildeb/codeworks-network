@@ -15,16 +15,20 @@ class ProfileService {
   async getProfilePosts(id) {
     const res = await api.get('api/profiles/' + id + '/posts')
     AppState.posts = res.data.posts
+    AppState.postPage = res.data
+  }
+
+  async queryProfilePosts(id, query) {
+    const res = await api.get('api/profiles/' + id + '/posts?page=' + query)
+    AppState.posts = res.data.posts
+    AppState.postPage = res.data
+    console.log('api/profiles/' + id + '/posts?page=' + query)
   }
 
   async editProfile(id, profileData) {
-    // const res = await api.put('api/profiles/' + id, profileData)
-    // console.log(res.data)
-    // AppState.account = res.data
-    console.log(AppState.account)
-    profileData.id = id
-    AppState.account = profileData
-    console.log(AppState.account)
+    const res = await api.put('api/profiles/' + id, profileData)
+    console.log(res.data)
+    AppState.account = res.data
   }
 }
 

@@ -21,14 +21,14 @@
         </div>
       </h2>
     </div>
-    <div>
+    <div class="text-center">
       <span>{{ post.createdAt }}</span>
       <p class="p-3">
         {{ post.body }}
       </p>
-      <img class="img-fluid" :src="post.imgUrl" alt="no img">
+      <img class="img-fluid" :src="post.imgUrl" alt="bad img" v-if="post.imgUrl">
     </div>
-    <i class="align-item-end" @click="like">likes: {{ post.likes.length }}</i>
+    <i class="justify-content-end" @click="like">likes: {{ post.likes.length }}</i>
   </div>
 </template>
 
@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .profile-icon{
   height: 50px;
   width: 50px;

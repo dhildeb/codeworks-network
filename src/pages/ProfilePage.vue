@@ -6,6 +6,19 @@
     <CreatePost />
   </div>
   <Post v-for="post in state.posts" :key="post.id" :post="post" />
+  <div class="p-3" v-if="state.postPage">
+    <span>
+      {{ state.postPage.page }}
+    </span>
+    <div>
+      <button class="btn btn-outline-secondary mx-5" @click="loadPage(-1)" v-if="state.postPage.newer">
+        previous posts
+      </button>
+      <button class="btn btn-outline-secondary mx-5" @click="loadPage(1)" v-if="state.postPage.older">
+        more posts
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -22,14 +35,20 @@ export default {
     const state = reactive({
       account: computed(() => AppState.account),
       posts: computed(() => AppState.posts),
-      activeProfile: computed(() => AppState.activeProfile)
+      activeProfile: computed(() => AppState.activeProfile),
+      postPage: computed(() => AppState.postPage)
     })
-    watchEffect(() => {
-      profileService.getProfileById(route.params.id)
-      profileService.getProfilePosts(route.params.id)
+    watchEffect(async() => {
+      await profileService.getProfileById(route.params.id)
+      await profileService.getProfilePosts(route.params.id)
     })
     return {
-      state
+      state,
+      async loadPage(n) {
+        AppState.pageNum += n
+        await profileService.queryProfilePosts(route.params.id, AppState.pageNum)
+        console.log(AppState.pageNum)
+      }
     }
   }
 }

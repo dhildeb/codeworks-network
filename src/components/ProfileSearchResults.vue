@@ -1,8 +1,7 @@
 <template>
   <router-link :to="{name: 'Profile', params: {id: profile._id}}">
-    <img class="img-fluid banner" :src="profile.coverImg" alt="">
-    <div class="d-flex">
-      <img class="img-fluid profile-icon rounded-circle" :src="profile.picture" alt="">
+    <div class="d-flex align-items-center">
+      <img class="img-fluid profile-icon rounded-circle m-3" :src="profile.picture" alt="">
       <div class="d-flex" v-if="profile.graduated">
         <span>grad!</span>
         <span>{{ profile.class }}</span>
