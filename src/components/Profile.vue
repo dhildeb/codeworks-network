@@ -1,35 +1,49 @@
 <template>
   <div class="p-5 m-3 border shadow">
-    Profile Component
     <div>
-      <img class="img-fluid banner" :src="state.account.coverImg" alt="">
-      <div>
-        <img :src="state.account.picture" alt="">
-        <div class="d-flex" v-if="state.account.graduated">
+      <img class="img-fluid banner" :src="state.activeProfile.coverImg" alt="">
+      <div class="d-flex">
+        <img class="img-fluid profile-icon rounded-circle" :src="state.activeProfile.picture" alt="">
+        <div class="d-flex" v-if="state.activeProfile.graduated">
           <span>grad!</span>
-          <span>{{ state.account.class }}</span>
-          <b>{{ state.account.name }}</b>
-          <a>github{{ state.account.github }}</a>
-          <a>linkedin{{ state.account.linkedin }}</a>
-          <a>resume{{ state.account.resume }}</a>
+          <span>{{ state.activeProfile.class }}</span>
         </div>
-        <p>{{ state.account.bio }}</p>
+        <div class="d-flex flex-column">
+          <b>{{ state.activeProfile.name }}</b>
+          <a>github{{ state.activeProfile.github }}</a>
+          <a>linkedin{{ state.activeProfile.linkedin }}</a>
+          <a>resume{{ state.activeProfile.resume }}</a>
+          <p>{{ state.activeProfile.bio }}</p>
+        </div>
       </div>
     </div>
-    <button class="btn btn-transparent text-info">
-      edit
-    </button>
+    <div v-if="state.account.id">
+      <button class="btn btn-outline-info" v-if="state.account.id === state.user.id">
+        edit
+      </button>
+    </div>
   </div>
+  <Post v-for="post in state.posts" :key="post.id" :post="post" />
 </template>
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { computed } from '@vue/runtime-core'
+import { computed, watchEffect } from '@vue/runtime-core'
 import { AppState } from '../AppState'
+import { profileService } from '../services/ProfileService'
+import { useRoute } from 'vue-router'
 export default {
   setup() {
+    const route = useRoute()
     const state = reactive({
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      activeProfile: computed(() => AppState.activeProfile),
+      posts: computed(() => AppState.posts),
+      user: computed(() => AppState.user)
+    })
+    watchEffect(() => {
+      profileService.getProfileById(route.params.id)
+      profileService.getProfilePosts(route.params.id)
     })
     return {
       state

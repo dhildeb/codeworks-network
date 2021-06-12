@@ -5,16 +5,19 @@ class PostService {
   async getPosts() {
     const res = await api.get('api/posts')
     AppState.posts = res.data.posts
-    console.log(AppState.posts)
+    AppState.postPage = res.data
   }
 
   async SearchPosts(query = {}) {
     const res = await api.get('api/posts?query=' + query)
-    console.log(res)
+    AppState.posts = res.data.posts
+    AppState.postPage = res.data
   }
 
   async getPostsByPage(pageNum) {
     const res = await api.get('api/posts?page=' + pageNum)
+    AppState.posts = res.data.posts
+    AppState.postPage = res.data
     console.log(res)
   }
 
@@ -25,12 +28,12 @@ class PostService {
 
   async createPost(postData) {
     const res = await api.post('api/posts', postData)
-    console.log(res)
+    AppState.posts = [res.data, ...AppState.posts]
   }
 
-  async likePost(id) {
-    const res = await api.post(`api/posts/${id}/like`)
-    console.log(res)
+  async likePost(postId, id) {
+    const res = await api.post(`api/posts/${postId}/like`)
+    return res.data.likeIds.find(i => i === id) ? 'liked' : 'unliked'
   }
 
   async editPost(id, postData) {
@@ -40,7 +43,8 @@ class PostService {
 
   async deletePost(id) {
     const res = await api.delete('api/posts/' + id)
-    console.log(res)
+    AppState.posts = AppState.posts.filter(p => p.id !== id)
+    return res.data
   }
 }
 

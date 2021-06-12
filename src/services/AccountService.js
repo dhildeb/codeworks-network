@@ -10,7 +10,6 @@ class AccountService {
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
-    console.log(AppState.account)
   }
 }
 

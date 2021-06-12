@@ -1,15 +1,27 @@
 <template>
   <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <CreatePost />
+    <div v-if="state.account.id">
+      <CreatePost />
+    </div>
     <Thread />
   </div>
 </template>
 
 <script>
+import { computed, reactive } from '@vue/runtime-core'
 import CreatePost from '../components/CreatePost.vue'
+import { AppState } from '../AppState'
 export default {
   components: { CreatePost },
-  name: 'Home'
+  name: 'Home',
+  setup() {
+    const state = reactive({
+      account: computed(() => AppState.account)
+    })
+    return {
+      state
+    }
+  }
 }
 </script>
 

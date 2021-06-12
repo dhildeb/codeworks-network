@@ -1,6 +1,6 @@
 <template>
   <div class="bg-dark text-light p-5 h-100">
-    <img :src="state.account.picture" alt="">
+    <img class="rounded-circle img-fluid" :src="state.account.picture" alt="">
     <div v-if="state.account.graduated">
       <span>grad!</span>
       <span>{{ state.account.class }}</span>

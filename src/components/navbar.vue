@@ -24,7 +24,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link :to="{ name: 'Profile' }" class="nav-link">
+          <router-link :to="{ name: 'Profile', params: {id: state.account.id} }" class="nav-link" v-if="state.account.id">
             Profile
           </router-link>
         </li>
@@ -52,7 +52,7 @@
               :src="user.picture"
               alt="user photo"
               height="40"
-              class="rounded"
+              class="rounded-circle"
             />
             <span class="mx-3">{{ user.name }}</span>
           </div>
@@ -87,7 +87,8 @@ export default {
   name: 'Navbar',
   setup() {
     const state = reactive({
-      dropOpen: false
+      dropOpen: false,
+      account: computed(() => AppState.account)
     })
     return {
       state,
