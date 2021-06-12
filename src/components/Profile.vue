@@ -1,23 +1,25 @@
 <template>
-  <div v-if="state.toggle">
+  <div class="row p-5 border shadow m-3" v-if="state.toggle">
     <EditProfile />
+    <div class="col-9"></div>
+    <button class="btn btn-outline-danger" @click="toggleEdit">
+      cancel
+    </button>
   </div>
-  <div class="m-3 border shadow">
-    <div>
-      <img class="img-fluid banner" :src="state.activeProfile.coverImg" alt="">
-      <div class="d-flex p-3">
-        <img class="img-fluid position-absolute profile-icon rounded-circle" :src="state.activeProfile.picture" alt="">
-        <div class="d-flex" v-if="state.activeProfile.graduated">
-          <span>grad!</span>
-          <span>{{ state.activeProfile.class }}</span>
-        </div>
-        <div class="d-flex flex-column">
-          <b>{{ state.activeProfile.name }}</b>
-          <a>github{{ state.activeProfile.github }}</a>
-          <a>linkedin{{ state.activeProfile.linkedin }}</a>
-          <a>resume{{ state.activeProfile.resume }}</a>
-          <p>{{ state.activeProfile.bio }}</p>
-        </div>
+  <div class="m-3 border shadow" v-else>
+    <img class="img-fluid banner" :src="state.activeProfile.coverImg" alt="">
+    <div class="d-flex px-3 py-5">
+      <img class="img-fluid position-absolute profile-icon rounded-circle" :src="state.activeProfile.picture" alt="">
+      <div class="d-flex position-absolute grad" v-if="state.activeProfile.graduated">
+        <span>grad!</span>
+        <span>{{ state.activeProfile.class }}</span>
+      </div>
+      <div class="d-flex flex-column">
+        <b>{{ state.activeProfile.name }}</b>
+        <a :href="state.activeProfile.github">github</a>
+        <a :href="state.activeProfile.linkedin">linkedin</a>
+        <a :href="state.activeProfile.resume">resume</a>
+        <p>{{ state.activeProfile.bio }}</p>
       </div>
     </div>
     <div v-if="state.account.id">
@@ -37,12 +39,12 @@ export default {
     const state = reactive({
       account: computed(() => AppState.account),
       activeProfile: computed(() => AppState.activeProfile),
-      toggle: false
+      toggle: computed(() => AppState.profileFormToggle)
     })
     return {
       state,
       toggleEdit() {
-        state.toggle = !state.toggle
+        AppState.profileFormToggle = !state.toggle
       }
     }
   }
@@ -53,8 +55,13 @@ export default {
 .profile-icon{
   height: 50px;
   width: 50px;
+  top: 240px;
 }
 .banner{
   height: 40vh;
+}
+.grad{
+  left: 127px;
+  top: 265px;
 }
 </style>

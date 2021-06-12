@@ -10,5 +10,6 @@ export const AppState = reactive({
   postPage: {},
   pageNum: 1,
   activeProfile: {},
-  profiles: []
+  profiles: [],
+  profileFormToggle: false
 })
