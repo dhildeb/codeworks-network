@@ -16,7 +16,7 @@
 import { reactive } from '@vue/reactivity'
 import { profileService } from '../services/ProfileService'
 import { postService } from '../services/PostService'
-import { computed } from '@vue/runtime-core'
+import { computed, onMounted } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 export default {
   setup() {
@@ -24,6 +24,9 @@ export default {
       query: null,
       profiles: computed(() => AppState.profiles),
       posts: computed(() => AppState.posts)
+    })
+    onMounted(() => {
+      AppState.posts = []
     })
     return {
       state,

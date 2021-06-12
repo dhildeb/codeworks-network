@@ -1,25 +1,32 @@
 <template>
   <div class="profile  flex-grow-1 d-flex flex-column align-items-center justify-content-center">
     <Profile />
-    <div v-if="state.account.id">
-      <CreatePost v-if="state.account.id === AppState.user.id" />
-    </div>
   </div>
+  <div v-if="state.account.id === state.activeProfile.id">
+    <CreatePost />
+  </div>
+  <Post v-for="post in state.posts" :key="post.id" :post="post" />
 </template>
 
 <script>
 import { reactive } from '@vue/reactivity'
 import { AppState } from '../AppState'
 import { computed, watchEffect } from '@vue/runtime-core'
+import { profileService } from '../services/ProfileService'
+import { useRoute } from 'vue-router'
+
 export default {
   name: 'ProfilePage',
   setup() {
+    const route = useRoute()
     const state = reactive({
       account: computed(() => AppState.account),
-      user: computed(() => AppState.user)
+      posts: computed(() => AppState.posts),
+      activeProfile: computed(() => AppState.activeProfile)
     })
     watchEffect(() => {
-      console.log(AppState.user)
+      profileService.getProfileById(route.params.id)
+      profileService.getProfilePosts(route.params.id)
     })
     return {
       state

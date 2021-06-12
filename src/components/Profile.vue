@@ -1,4 +1,7 @@
 <template>
+  <div v-if="state.toggle">
+    <EditProfile />
+  </div>
   <div class="p-5 m-3 border shadow">
     <div>
       <img class="img-fluid banner" :src="state.activeProfile.coverImg" alt="">
@@ -18,35 +21,30 @@
       </div>
     </div>
     <div v-if="state.account.id">
-      <button class="btn btn-outline-info" v-if="state.account.id === state.user.id">
+      <button class="btn btn-outline-info" @click="toggleEdit" v-if="state.account.id === state.activeProfile.id">
         edit
       </button>
     </div>
   </div>
-  <Post v-for="post in state.posts" :key="post.id" :post="post" />
 </template>
 
 <script>
 import { reactive } from '@vue/reactivity'
-import { computed, watchEffect } from '@vue/runtime-core'
+import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
-import { profileService } from '../services/ProfileService'
-import { useRoute } from 'vue-router'
 export default {
   setup() {
-    const route = useRoute()
     const state = reactive({
       account: computed(() => AppState.account),
       activeProfile: computed(() => AppState.activeProfile),
-      posts: computed(() => AppState.posts),
-      user: computed(() => AppState.user)
-    })
-    watchEffect(() => {
-      profileService.getProfileById(route.params.id)
-      profileService.getProfilePosts(route.params.id)
+      toggle: false
     })
     return {
-      state
+      state,
+      toggleEdit() {
+        state.toggle = !state.toggle
+        console.log(state.toggle)
+      }
     }
   }
 }

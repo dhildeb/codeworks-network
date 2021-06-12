@@ -1,6 +1,6 @@
 <template>
   <div class="border shadow my-5 rounded p-3">
-    <button class="btn btn-outline-danger" @click="deletePost" v-if="state.account.id">
+    <button class="btn btn-outline-danger" @click="deletePost" v-if="state.account.id === post.creator.id">
       delete
     </button>
     <div class="d-flex justify-content-between p-3 bg-gradient-info">
