@@ -12,7 +12,7 @@ class AccountService {
     }
   }
 
-  async editProfile(id, profileData) {
+  async editProfile(profileData) {
     const res = await api.put('/account', profileData)
     console.log(res)
   }

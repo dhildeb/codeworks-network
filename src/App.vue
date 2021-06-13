@@ -1,17 +1,17 @@
 <template>
-  <header>
+  <header class="sticky-top">
     <Navbar />
   </header>
   <main>
-    <div class="container-fluid">
+    <div class="container-fluid bg-white">
       <div class="row">
-        <div class="col-2 p-0">
+        <div class="col-2 p-0 stick-l">
           <Login />
         </div>
-        <div class="col-8">
+        <div class="col-8 bg-light">
           <router-view />
         </div>
-        <div class="col-2 d-flex flex-column">
+        <div class="col-2 d-flex flex-column stick-r">
           <SidePics v-for="pic in state.sidePics" :key="pic.title" :pic="pic" />
         </div>
       </div>
@@ -33,6 +33,9 @@ export default {
     watchEffect(() => {
       try {
         sidePicsService.getSidePics()
+        setInterval(() => {
+          sidePicsService.getSidePics()
+        }, 15000)
       } catch (error) {
         Notification.toast(error)
       }
@@ -46,5 +49,9 @@ export default {
 </script>
 <style lang="scss">
 @import "./assets/scss/main.scss";
+.stick-r{
+  position: fixed;
+    right: 0px;
+}
 
 </style>

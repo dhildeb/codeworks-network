@@ -61,7 +61,7 @@ export default {
       state,
       editProfile() {
         try {
-          accountService.editProfile(state.account.id, state.profileData)
+          accountService.editProfile(state.profileData)
           AppState.profileFormToggle = false
         } catch (error) {
           Notification.toast(error)

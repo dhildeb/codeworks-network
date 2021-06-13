@@ -66,7 +66,7 @@ export default {
   height: 40vh;
 }
 .grad{
-  left: 127px;
-  top: 265px;
+  left: 300px;
+  top: 275px;
 }
 </style>

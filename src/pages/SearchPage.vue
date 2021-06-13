@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+  <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center full-view">
     <form @submit.prevent="search">
       <input type="text" id="query" placeholder="Enter Search Here" v-model="state.query">
       <button class="btn btn-outline-info">
@@ -49,5 +49,7 @@ export default {
 </script>
 
 <style>
-
+.full-view{
+  min-height: 100vh;
+}
 </style>

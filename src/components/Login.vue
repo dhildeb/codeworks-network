@@ -1,20 +1,26 @@
 <template>
   <div class="bg-dark text-light p-5 h-100">
-    <img class="rounded-circle img-fluid" :src="state.account.picture" alt="">
-    <div v-if="state.account.graduated">
-      <span>grad!</span>
-      <span>{{ state.account.class }}</span>
+    <div class="stick">
+      <div>
+        <img class="rounded-circle img-fluid profile-icon" :src="state.account.picture" alt="">
+      </div>
+      <div class="d-flex flex-column text-light">
+        <div v-if="state.account.graduated">
+          <span>grad!</span>
+          <span>{{ state.account.class }}</span>
+        </div>
+        <b class="p-1 pt-3">{{ state.account.name }}</b>
+        <a class="p-1" :href="state.account.github" v-if="state.account.github">github</a>
+        <a class="p-1" :href="state.account.linkedin" v-if="state.account.linkedin">linkedin</a>
+        <a class="p-1" :href="state.account.resume" v-if="state.account.resume">resume</a>
+      </div>
+      <button
+        class="btn btn-outline-danger my-5"
+        @click="logout"
+      >
+        logout
+      </button>
     </div>
-    <b>{{ state.account.name }}</b>
-    <a>{{ state.account.github }}</a>
-    <a>{{ state.account.linkedin }}</a>
-    <a>{{ state.account.resume }}</a>
-    <button
-      class="btn btn-outline-danger my-5 m-3"
-      @click="logout"
-    >
-      logout
-    </button>
   </div>
 </template>
 
@@ -46,6 +52,14 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.profile-icon{
+  height: 50px;
+  width: 50px;
+  top: 240px;
+}
+.stick{
+  position: fixed;
+  left: 50px;
+}
 </style>
