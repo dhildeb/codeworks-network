@@ -2,7 +2,10 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <h1>Network</h1>
+        <img class="logo" src="https://www.freeiconspng.com/thumbs/network-icon/data-network-icon-image-gallery-5.png" alt="">
+        <h1 class="logo-blue">
+          Network
+        </h1>
       </div>
     </router-link>
     <button
@@ -148,5 +151,11 @@ a:hover {
 }
 .nav-item .nav-link.router-link-exact-active{
   color: var(--primary);
+}
+.logo{
+  height: 50px;
+}
+.logo-blue{
+  color: #3e84ab;
 }
 </style>

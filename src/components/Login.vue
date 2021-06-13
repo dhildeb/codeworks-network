@@ -1,7 +1,7 @@
 <template>
   <div class="bg-dark text-light p-5 h-100">
     <div class="stick">
-      <div>
+      <div v-if="state.account.id">
         <img class="rounded-circle img-fluid profile-icon" :src="state.account.picture" alt="">
       </div>
       <div class="d-flex flex-column text-light">
@@ -9,10 +9,10 @@
           <span>grad!</span>
           <span>{{ state.account.class }}</span>
         </div>
-        <b class="p-1 pt-3">{{ state.account.name }}</b>
-        <a class="p-1" :href="state.account.github" v-if="state.account.github">github</a>
-        <a class="p-1" :href="state.account.linkedin" v-if="state.account.linkedin">linkedin</a>
-        <a class="p-1" :href="state.account.resume" v-if="state.account.resume">resume</a>
+        <b class="p-1 text-info pt-3">{{ state.account.name }}</b>
+        <a class="p-1 text-info" :href="state.account.github" v-if="state.account.github">github</a>
+        <a class="p-1 text-info" :href="state.account.linkedin" v-if="state.account.linkedin">linkedin</a>
+        <a class="p-1 text-info" :href="state.account.resume" v-if="state.account.resume">resume</a>
       </div>
       <button
         class="btn btn-outline-danger my-5"
@@ -62,4 +62,5 @@ export default {
   position: fixed;
   left: 50px;
 }
+
 </style>
