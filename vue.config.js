@@ -1,6 +1,6 @@
 module.exports = {
   // NOTE to host on github publicPath: '/YOUR-GITHUB-REPOSITORY-NAME/',
-  publicPath: '/codeworks-network/',
+  publicPath: '/dhildeb.github.io/codeworks-network/',
   outputDir: 'docs',
   productionSourceMap: false
 }
