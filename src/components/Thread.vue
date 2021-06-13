@@ -5,7 +5,7 @@
   <div class="m-3">
     <Post v-for="post in state.posts" :key="post.id" :post="post" />
   </div>
-  <div class="p-3" v-if="state.postPage">
+  <div class="p-3 text-center" v-if="state.postPage">
     <span>
       {{ state.postPage.page }}
     </span>

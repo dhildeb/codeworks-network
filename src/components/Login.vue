@@ -11,7 +11,7 @@
       </router-link>
       <div class="d-flex flex-column text-light">
         <span>{{ state.account.class }}</span>
-        <b class="p-1 text-info pt-3">{{ state.account.name }}</b>
+        <b class="p-1 text-info pt-3">{{ state.name[0] }}</b>
         <a class="p-1 text-info" :href="state.account.github" v-if="state.account.github">github</a>
         <a class="p-1 text-info" :href="state.account.linkedin" v-if="state.account.linkedin">linkedin</a>
         <a class="p-1 text-info" :href="state.account.resume" v-if="state.account.resume">resume</a>
@@ -36,7 +36,8 @@ import Notification from '../utils/Notification'
 export default {
   setup() {
     const state = reactive({
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      name: AppState.account.name.split('@')
     })
     return {
       state,
