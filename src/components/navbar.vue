@@ -30,11 +30,17 @@
         </li>
         <li class="nav-item">
           <router-link :to="{ name: 'Search' }" class="nav-link">
-            Search
+            Search Page
           </router-link>
         </li>
       </ul>
-      <span class="navbar-text">
+      <form @submit.prevent="search">
+        <input type="text" id="query" placeholder="Enter Search Here" v-model="state.query">
+        <button class="btn btn-outline-info" type="submit">
+          Search
+        </button>
+      </form>
+      <span class="navbar-text ml-5">
         <button
           class="btn btn-outline-primary text-uppercase"
           @click="login"
@@ -84,12 +90,15 @@ import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
 import Notification from '../utils/Notification'
+import { useRouter } from 'vue-router'
 export default {
   name: 'Navbar',
   setup() {
     const state = reactive({
+      query: '',
       dropOpen: false,
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      router: useRouter()
     })
     return {
       state,
@@ -107,6 +116,11 @@ export default {
         } catch (error) {
           Notification.toast(error)
         }
+      },
+      search() {
+        AppState.search = state.query
+        state.router.push({ name: 'Search' })
+        state.query = ''
       }
     }
   }

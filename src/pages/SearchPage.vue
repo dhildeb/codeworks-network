@@ -20,7 +20,7 @@ import { AppState } from '../AppState'
 export default {
   setup() {
     const state = reactive({
-      query: '',
+      query: AppState.search,
       profiles: computed(() => AppState.profiles),
       posts: computed(() => AppState.posts)
     })
@@ -32,13 +32,16 @@ export default {
     return {
       state,
       search() {
+        let search = ''
+        state.query ? search = state.query : search = AppState.search
+        console.log(search)
         try {
-          profileService.getProfilesByQuery(state.query)
+          profileService.getProfilesByQuery(search)
         } catch (error) {
           Notification.toast(error)
         }
         try {
-          postService.SearchPosts(state.query)
+          postService.SearchPosts(search)
         } catch (error) {
           Notification.toast(error)
         }
