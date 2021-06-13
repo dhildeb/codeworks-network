@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 m-3 border shadow">
+  <div class="p-5 m-3 border bg-info shadow">
     <img class="img-fluid profile-icon mb-3 rounded-circle" :src="state.account.picture" alt="">
     <form class="" @submit.prevent="createPost" v-if="state.account">
       <div class="form-group" src="message">
@@ -9,7 +9,7 @@
       <div class="form-group border-0" src="image url">
         <input type="text rounded" id="imgUrl" placeholder="image url" v-model="state.imgUrl">
       </div>
-      <button type="submit" class="btn btn-transparent border-info text-info">
+      <button type="submit" class="btn btn-light text-info">
         create post
       </button>
     </form>

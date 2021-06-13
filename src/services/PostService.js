@@ -18,7 +18,6 @@ class PostService {
     const res = await api.get('api/posts?page=' + pageNum)
     AppState.posts = res.data.posts
     AppState.postPage = res.data
-    console.log(res)
   }
 
   async getPostsById(id) {

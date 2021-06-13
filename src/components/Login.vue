@@ -17,6 +17,7 @@
       <button
         class="btn btn-outline-danger my-5"
         @click="logout"
+        v-if="state.account.id"
       >
         logout
       </button>

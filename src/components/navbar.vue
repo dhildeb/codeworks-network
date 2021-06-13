@@ -38,7 +38,7 @@
         </li>
       </ul>
       <form @submit.prevent="search">
-        <input type="text" id="query" placeholder="Enter Search Here" v-model="state.query">
+        <input class="p-1" type="text" id="query" placeholder="Enter Search Here" v-model="state.query">
         <button class="btn btn-outline-info" type="submit">
           Search
         </button>

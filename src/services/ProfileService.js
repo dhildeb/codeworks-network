@@ -22,12 +22,10 @@ class ProfileService {
     const res = await api.get('api/profiles/' + id + '/posts?page=' + query)
     AppState.posts = res.data.posts
     AppState.postPage = res.data
-    console.log('api/profiles/' + id + '/posts?page=' + query)
   }
 
   async editProfile(id, profileData) {
     const res = await api.put('api/profiles/' + id, profileData)
-    console.log(res.data)
     AppState.account = res.data
   }
 }
