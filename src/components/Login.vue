@@ -1,14 +1,16 @@
 <template>
   <div class="bg-dark text-light p-5 h-100">
     <div class="stick">
-      <div v-if="state.account.id">
-        <img class="rounded-circle img-fluid profile-icon" :src="state.account.picture" alt="">
-      </div>
-      <div class="d-flex flex-column text-light">
-        <div v-if="state.account.graduated">
-          <span>grad!</span>
-          <span>{{ state.account.class }}</span>
+      <router-link :to="{name: 'Profile', params: { id: state.account.id}}"
+                   v-if="state.account.id"
+      >
+        <div class="text-center text-light" v-if="state.account.graduated">
+          <i class="fa fa-graduation-cap fa-2x position-absolute pr-3" aria-hidden="true"></i>
         </div>
+        <img class="rounded-circle profile-icon img-fluid" :src="state.account.picture" alt="">
+      </router-link>
+      <div class="d-flex flex-column text-light">
+        <span>{{ state.account.class }}</span>
         <b class="p-1 text-info pt-3">{{ state.account.name }}</b>
         <a class="p-1 text-info" :href="state.account.github" v-if="state.account.github">github</a>
         <a class="p-1 text-info" :href="state.account.linkedin" v-if="state.account.linkedin">linkedin</a>
@@ -55,13 +57,14 @@ export default {
 
 <style scoped>
 .profile-icon{
-  height: 50px;
-  width: 50px;
-  top: 240px;
+  height: 125px;
+  width: 125px;
 }
 .stick{
   position: fixed;
   left: 50px;
 }
-
+.fa{
+  left: 0;
+}
 </style>

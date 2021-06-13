@@ -1,8 +1,8 @@
 <template>
-  <div class="row p-5 border shadow m-3" v-if="state.toggle">
+  <div class="row p-5 border-dark shadow bg-info m-3" v-if="state.toggle">
     <EditProfile />
     <div class="col-9"></div>
-    <button class="btn btn-outline-danger" @click="toggleEdit">
+    <button class="btn btn-danger" @click="toggleEdit">
       cancel
     </button>
   </div>
@@ -10,11 +10,11 @@
     <img class="img-fluid banner" :src="state.activeProfile.coverImg" alt="">
     <div class="d-flex px-3 py-5">
       <img class="img-fluid position-absolute profile-icon rounded-circle" :src="state.activeProfile.picture" alt="">
-      <div class="d-flex position-absolute grad" v-if="state.activeProfile.graduated">
-        <span>grad!</span>
-        <span>{{ state.activeProfile.class }}</span>
-      </div>
       <div class="d-flex flex-column">
+        <div class="d-flex grad" v-if="state.activeProfile.graduated">
+          <i class="fa fa-graduation-cap fa-lg" aria-hidden="true"></i>
+          <span>{{ state.activeProfile.class }}</span>
+        </div>
         <b>{{ name }}</b>
         <a :href="state.activeProfile.github" v-if="state.activeProfile.github">github</a>
         <a :href="state.activeProfile.linkedin" v-if="state.activeProfile.linkedin">linkedin</a>
@@ -45,7 +45,6 @@ export default {
       state,
       toggleEdit() {
         AppState.profileFormToggle = !state.toggle
-        console.log(state.account.id)
       },
       name: computed(() => {
         // return AppState.activeProfile.name.split('@')

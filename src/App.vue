@@ -1,18 +1,24 @@
 <template>
   <header class="sticky-top">
-    <Navbar />
   </header>
   <main>
     <div class="container-fluid bg-white">
       <div class="row">
-        <div class="col-2 p-0 stick-l">
+        <div class="col-2 p-0 stick-l d-none d-lg-block" v-if="state.account.id">
           <Login />
         </div>
-        <div class="col-8 bg-light">
-          <router-view />
-        </div>
-        <div class="col-2 d-flex flex-column stick-r">
-          <SidePics v-for="pic in state.sidePics" :key="pic.title" :pic="pic" />
+        <div class="col bg-light">
+          <div class="row">
+            <Navbar />
+          </div>
+          <div class="row">
+            <div class="col-lg-10">
+              <router-view />
+            </div>
+            <div class="col-2 d-flex flex-column stick-r d-none d-lg-block">
+              <SidePics class="d-none d-lg-block" v-for="pic in state.sidePics" :key="pic.title" :pic="pic" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -27,7 +33,7 @@ export default {
   name: 'App',
   setup() {
     const state = reactive({
-
+      account: computed(() => AppState.account),
       sidePics: computed(() => AppState.sidePics)
     })
     watchEffect(() => {

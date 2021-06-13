@@ -1,19 +1,19 @@
 <template>
-  <div class="border shadow rounded my-5 pb-3">
+  <div class="border shadow rounded m-5 pb-3">
     <div class="d-flex justify-content-between p-3 bg-gradient-info">
       <router-link :to="{name: 'Profile', params: {id: post.creator.id}}">
         <img class="profile-icon rounded-circle mr-3" v-if="post.creator" :src="post.creator.picture" alt="">
         <span class="text-dark">{{ post.creator.name }}</span>
       </router-link>
       <h2 class="dropdown click" v-if="state.account.id === post.creator.id" title="options">
-        <div class="text-secondary"
-             id="dropdownMenuButton"
-             data-toggle="dropdown"
-             aria-haspopup="true"
-             aria-expanded="false"
+        <h1 class="text-dark"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
         >
           ...
-        </div>
+        </h1>
         <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
           <i class="text-danger" @click="deletePost">
             delete

@@ -1,4 +1,7 @@
 <template>
+  <h2 class="pt-5 text-center">
+    Posts
+  </h2>
   <div class="m-3">
     <Post v-for="post in state.posts" :key="post.id" :post="post" />
   </div>

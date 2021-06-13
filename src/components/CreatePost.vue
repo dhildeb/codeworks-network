@@ -1,4 +1,7 @@
 <template>
+  <h3 class="pt-3">
+    Create a Post
+  </h3>
   <div class="p-5 m-3 border bg-info shadow">
     <img class="img-fluid profile-icon mb-3 rounded-circle" :src="state.account.picture" alt="">
     <form class="" @submit.prevent="createPost" v-if="state.account">

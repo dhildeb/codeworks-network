@@ -1,10 +1,13 @@
 <template>
-  <div class="profile  flex-grow-1 d-flex flex-column align-items-center justify-content-center">
+  <div class="d-flex flex-column align-items-center justify-content-center">
     <Profile />
   </div>
   <div v-if="state.account.id === state.activeProfile.id">
     <CreatePost />
   </div>
+  <h2 class="pt-5 text-center">
+    Posts
+  </h2>
   <Post v-for="post in state.posts" :key="post.id" :post="post" />
   <div class="p-3" v-if="state.postPage">
     <span>

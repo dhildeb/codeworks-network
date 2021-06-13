@@ -1,12 +1,12 @@
 <template>
-  <div class="flex-grow-1 d-flex flex-column align-items-center justify-content-center full-view">
-    <form @submit.prevent="search">
+  <div class="flex-grow-1 d-flex flex-column align-items-center full-view m-3">
+    <form class=" p-3" @submit.prevent="search">
       <input type="text" id="query" placeholder="Enter Search Here" v-model="state.query">
       <button class="btn btn-info">
         Search
       </button>
     </form>
-    <ProfileSearchResults class="border shadow box m-1" v-for="profile in state.profiles" :key="profile.id" :profile="profile" />
+    <ProfileSearchResults class="border shadow box p-2 m-1" v-for="profile in state.profiles" :key="profile.id" :profile="profile" />
     <Post v-for="post in state.posts" :key="post.id" :post="post" />
   </div>
 </template>

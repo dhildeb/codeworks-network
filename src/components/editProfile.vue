@@ -1,36 +1,45 @@
 <template>
-  <form class="col-12" @submit.prevent="editProfile">
+  <h2>Update Your Profile</h2>
+  <form class="col-12 p-3" @submit.prevent="editProfile">
     <div class="row">
       <div class="col-6">
+        <h5>banner image</h5>
         <div class="form-group">
-          <input type="text" placeholder="cover image url" v-model="state.profileData.coverImg">
+          <input type="text" v-model="state.profileData.coverImg">
         </div>
+        <h5>profile picture</h5>
         <div class="form-group">
-          <input type="text" placeholder="profile image url" v-model="state.profileData.picture">
+          <input type="text" v-model="state.profileData.picture">
         </div>
+        <h5>class attended</h5>
         <div class="form-group">
-          <input type="number" minlength="4" maxlength="4" placeholder="attended class" v-model="state.profileData.class">
+          <input type="number" minlength="4" maxlength="4" v-model="state.profileData.class">
         </div>
         <div class="form-group">
           <input type="checkbox" v-model="state.profileData.graduated">
-          <label class="p-3">graduated</label>
+          <label class="p-3">
+            graduated
+          </label>
         </div>
       </div>
       <div class="col-6">
+        <h5>github link</h5>
         <div class="form-group">
-          <input type="text" placeholder="github url" v-model="state.profileData.github">
+          <input type="text" v-model="state.profileData.github">
         </div>
+        <h5>linkedin link</h5>
         <div class="form-group">
-          <input type="text" placeholder="linkedin url" v-model="state.profileData.linkedin">
+          <input type="text" v-model="state.profileData.linkedin">
         </div>
+        <h5>resume link</h5>
         <div class="form-group">
-          <input type="text" placeholder="resume url" v-model="state.profileData.resume">
+          <input type="text" v-model="state.profileData.resume">
         </div>
       </div>
       <textarea class="form-group col-12" rows="5" type="text" placeholder="tell us about yourself" v-model="state.profileData.bio">
       </textarea>
     </div>
-    <button class="btn btn-outline-success" type="submit">
+    <button class="btn btn-success" type="submit">
       submit changes
     </button>
   </form>
