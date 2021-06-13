@@ -39,8 +39,9 @@
 <script>
 import { reactive } from '@vue/reactivity'
 import { AppState } from '../AppState'
-import { profileService } from '../services/ProfileService'
 import { computed } from '@vue/runtime-core'
+import Notification from '../utils/Notification'
+import { accountService } from '../services/AccountService'
 export default {
   setup() {
     const state = reactive({
@@ -59,8 +60,12 @@ export default {
     return {
       state,
       editProfile() {
-        profileService.editProfile(state.account.id, state.profileData)
-        AppState.profileFormToggle = false
+        try {
+          accountService.editProfile(state.account.id, state.profileData)
+          AppState.profileFormToggle = false
+        } catch (error) {
+          Notification.toast(error)
+        }
       }
     }
   }

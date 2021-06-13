@@ -28,7 +28,7 @@
       </p>
       <img class="img-fluid" :src="post.imgUrl" alt="bad img" v-if="post.imgUrl">
     </div>
-    <i class="justify-content-end" @click="like">likes: {{ post.likes.length }}</i>
+    <i class="justify-content-end click p-3" :title="post.likes" @click="like">likes: {{ post.likes.length }}</i>
   </div>
 </template>
 
@@ -56,6 +56,7 @@ export default {
         }
       },
       async like() {
+        console.log(props.post.likes)
         try {
           const res = await postService.likePost(props.post.id, state.account.id)
           Notification.toast('you successfully ' + res + ' this post', 'success')

@@ -33,8 +33,12 @@ export default {
       state,
       async logout() {
         if (await Notification.confirmAction('are you sure you want to logout?')) {
-          AuthService.logout({ returnTo: window.location.origin })
-          Notification.toast('you have logged out')
+          try {
+            AuthService.logout({ returnTo: window.location.origin })
+            Notification.toast('you have logged out')
+          } catch (error) {
+            Notification.toast(error)
+          }
         }
       }
     }

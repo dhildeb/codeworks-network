@@ -27,6 +27,8 @@ import { AppState } from '../AppState'
 import { computed, watchEffect } from '@vue/runtime-core'
 import { profileService } from '../services/ProfileService'
 import { useRoute } from 'vue-router'
+import Notification from '../utils/Notification'
+import { postService } from '../services/PostService'
 
 export default {
   name: 'ProfilePage',
@@ -39,15 +41,40 @@ export default {
       postPage: computed(() => AppState.postPage)
     })
     watchEffect(async() => {
-      await profileService.getProfileById(route.params.id)
-      await profileService.getProfilePosts(route.params.id)
+      try {
+        if (route.params.id) {
+          await profileService.getProfileById(route.params.id)
+        }
+      } catch (error) {
+        Notification.toast(error)
+      }
+      try {
+        if (route.params.id) {
+          await profileService.getProfilePosts(route.params.id)
+        }
+      } catch (error) {
+        Notification.toast(error)
+      }
     })
     return {
       state,
       async loadPage(n) {
-        AppState.pageNum += n
-        await profileService.queryProfilePosts(route.params.id, AppState.pageNum)
-        console.log(AppState.pageNum)
+        // try {
+        //   AppState.pageNum += n
+        //   await profileService.queryProfilePosts(route.params.id, AppState.pageNum)
+        //   console.log(AppState.pageNum)
+        //   window.scrollTo({ top: 0, behavior: 'smooth' })
+        // } catch (error) {
+        //   Notification.toast(error)
+        // }
+        try {
+          AppState.pageNum += n
+          await postService.searchPosts(route.params.id, AppState.pageNum)
+          console.log(AppState.pageNum)
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        } catch (error) {
+          Notification.toast(error)
+        }
       }
     }
   }

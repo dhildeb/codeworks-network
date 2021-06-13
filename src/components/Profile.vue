@@ -15,10 +15,10 @@
         <span>{{ state.activeProfile.class }}</span>
       </div>
       <div class="d-flex flex-column">
-        <b>{{ state.activeProfile.name }}</b>
-        <a :href="state.activeProfile.github">github</a>
-        <a :href="state.activeProfile.linkedin">linkedin</a>
-        <a :href="state.activeProfile.resume">resume</a>
+        <b>{{ name }}</b>
+        <a :href="state.activeProfile.github" v-if="state.activeProfile.github">github</a>
+        <a :href="state.activeProfile.linkedin" v-if="state.activeProfile.linkedin">linkedin</a>
+        <a :href="state.activeProfile.resume" v-if="state.activeProfile.resume">resume</a>
         <p>{{ state.activeProfile.bio }}</p>
       </div>
     </div>
@@ -45,7 +45,12 @@ export default {
       state,
       toggleEdit() {
         AppState.profileFormToggle = !state.toggle
-      }
+        console.log(state.account.id)
+      },
+      name: computed(() => {
+        // return AppState.activeProfile.name.split('@')
+        return AppState.activeProfile.name
+      })
     }
   }
 }

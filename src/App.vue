@@ -31,7 +31,11 @@ export default {
       sidePics: computed(() => AppState.sidePics)
     })
     watchEffect(() => {
-      sidePicsService.getSidePics()
+      try {
+        sidePicsService.getSidePics()
+      } catch (error) {
+        Notification.toast(error)
+      }
     })
     return {
       state,

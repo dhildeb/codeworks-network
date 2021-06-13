@@ -7,7 +7,6 @@
       </button>
     </form>
     <ProfileSearchResults v-for="profile in state.profiles" :key="profile.id" :profile="profile" />
-    <div> </div>
     <Post v-for="post in state.posts" :key="post.id" :post="post" />
   </div>
 </template>
@@ -21,18 +20,28 @@ import { AppState } from '../AppState'
 export default {
   setup() {
     const state = reactive({
-      query: null,
+      query: '',
       profiles: computed(() => AppState.profiles),
       posts: computed(() => AppState.posts)
     })
     onMounted(() => {
       AppState.posts = []
+      AppState.activeProfile = {}
+      AppState.profiles = []
     })
     return {
       state,
       search() {
-        profileService.getProfilesByQuery(state.query)
-        postService.SearchPosts(state.query)
+        try {
+          profileService.getProfilesByQuery(state.query)
+        } catch (error) {
+          Notification.toast(error)
+        }
+        try {
+          postService.SearchPosts(state.query)
+        } catch (error) {
+          Notification.toast(error)
+        }
       }
     }
   }

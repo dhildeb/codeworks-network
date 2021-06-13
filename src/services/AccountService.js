@@ -11,6 +11,10 @@ class AccountService {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
     }
   }
+
+  async editProfile(id, profileData) {
+    
+  }
 }
 
 export const accountService = new AccountService()

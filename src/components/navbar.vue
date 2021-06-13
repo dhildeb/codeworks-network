@@ -83,6 +83,7 @@
 import { AuthService } from '../services/AuthService'
 import { AppState } from '../AppState'
 import { computed, reactive } from 'vue'
+import Notification from '../utils/Notification'
 export default {
   name: 'Navbar',
   setup() {
@@ -94,10 +95,18 @@ export default {
       state,
       user: computed(() => AppState.user),
       async login() {
-        AuthService.loginWithPopup()
+        try {
+          AuthService.loginWithPopup()
+        } catch (error) {
+          Notification.toast(error)
+        }
       },
       async logout() {
-        AuthService.logout({ returnTo: window.location.origin })
+        try {
+          AuthService.logout({ returnTo: window.location.origin })
+        } catch (error) {
+          Notification.toast(error)
+        }
       }
     }
   }

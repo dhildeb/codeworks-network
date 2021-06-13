@@ -29,13 +29,22 @@ export default {
       postPage: computed(() => AppState.postPage)
     })
     watchEffect(async() => {
-      await postService.getPosts()
+      try {
+        await postService.getPosts()
+      } catch (error) {
+        Notification.toast(error)
+      }
     })
     return {
       state,
       async loadPage(n) {
-        AppState.pageNum += n
-        await postService.getPostsByPage(AppState.pageNum)
+        try {
+          AppState.pageNum += n
+          await postService.getPostsByPage(AppState.pageNum)
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        } catch (error) {
+          Notification.toast(error)
+        }
       }
     }
   }

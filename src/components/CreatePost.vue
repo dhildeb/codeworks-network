@@ -21,6 +21,7 @@ import { reactive } from '@vue/reactivity'
 import { computed } from '@vue/runtime-core'
 import { AppState } from '../AppState'
 import { postService } from '../services/PostService'
+import Notification from '../utils/Notification'
 export default {
   setup() {
     const state = reactive({
@@ -31,13 +32,17 @@ export default {
     return {
       state,
       createPost() {
-        const post = {
-          body: state.body,
-          imgUrl: state.imgUrl
+        try {
+          const post = {
+            body: state.body,
+            imgUrl: state.imgUrl
+          }
+          postService.createPost(post)
+          state.body = ''
+          state.imgUrl = ''
+        } catch (error) {
+          Notification.toast(error)
         }
-        postService.createPost(post)
-        state.body = ''
-        state.imgUrl = ''
       }
     }
   }
