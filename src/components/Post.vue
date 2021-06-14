@@ -16,7 +16,7 @@
           ...
         </h1>
         <div class="dropdown-menu text-center" aria-labelledby="dropdownMenuButton">
-          <i class="text-danger" @click="deletestate.Post[0]">
+          <i class="text-danger" @click="deletePost">
             delete
           </i>
         </div>

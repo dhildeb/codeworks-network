@@ -62,14 +62,13 @@ export default {
     return {
       state,
       async loadPage(n) {
-        // try {
-        //   AppState.pageNum += n
-        //   await profileService.queryProfilePosts(route.params.id, AppState.pageNum)
-        //   console.log(AppState.pageNum)
-        //   window.scrollTo({ top: 0, behavior: 'smooth' })
-        // } catch (error) {
-        //   Notification.toast(error)
-        // }
+        try {
+          AppState.pageNum += n
+          await profileService.getProfilePosts(route.params.id, AppState.pageNum)
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        } catch (error) {
+          Notification.toast(error)
+        }
         try {
           AppState.pageNum += n
           await postService.searchPosts(route.params.id, AppState.pageNum)

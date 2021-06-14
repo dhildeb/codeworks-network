@@ -20,10 +20,10 @@ class PostService {
     AppState.postPage = res.data
   }
 
-  async getPostsById(id) {
-    const res = await api.get('api/posts/' + id)
-    console.log(res)
-  }
+  // async getPostsById(id) {
+  //   const res = await api.get('api/posts/' + id)
+  //   console.log(res)
+  // }
 
   async createPost(postData) {
     const res = await api.post('api/posts', postData)
@@ -37,10 +37,9 @@ class PostService {
     return res.data.likeIds.find(i => i === id) ? 'liked' : 'unliked'
   }
 
-  async editPost(id, postData) {
-    const res = await api.put('api/posts/' + id, postData)
-    console.log(res)
-  }
+  // async editPost(id, postData) {
+  //   const res = await api.put('api/posts/' + id, postData)
+  // }
 
   async deletePost(id) {
     const res = await api.delete('api/posts/' + id)
